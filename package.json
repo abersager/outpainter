@@ -9,6 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@fal-ai/serverless-client": "^0.8.6",
     "@pinia/nuxt": "^0.4.11",
