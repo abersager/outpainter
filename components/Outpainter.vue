@@ -11,7 +11,7 @@
       :class="{ fade: state === 'output' }"
       :style="`background-image: url(${cropDataURL});width: ${relativeCropWidth * 100}%`"
     )
-    
+
   .prompt-input.my-5(
     class="w-full"
   )
@@ -39,7 +39,6 @@
 import { mapActions } from 'pinia'
 
 import useAppStore from '@/stores/app'
-import { EventBus } from '@/services'
 import { IMG_DIMENSIONS, IMG_PADDING, MASK_OVERLAP } from '@/config'
 
 export default {
@@ -122,7 +121,7 @@ export default {
       this.state = 'loading'
       this.output = null
       try {
-        await this.createPrediction({
+        const result = await this.createPrediction({
           input: {
             image: this.imageDataURL,
             mask: this.maskDataURL,
@@ -132,17 +131,12 @@ export default {
             num_outputs: 1
           }
         })
+        this.predictionOutput(result.images[0].url)
       } catch (e) {
         console.log(e)
       }
     }
   },
-  mounted() {
-    EventBus.$on('prediction:output', this.predictionOutput)
-  },
-  beforeUnmount() {
-    EventBus.$off('prediction:output', this.predictionOutput)
-  }
 }
 </script>
 

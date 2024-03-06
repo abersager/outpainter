@@ -1,7 +1,7 @@
 <template lang="pug">
 footer.mt-40
   .text-center
-    | Outpainter is an open-source project from 
+    | Outpainter is an open-source project from
     a.underline(
       href="https://replicate.com?utm_source=project&utm_campaign=outpainter"
       target="_blank"

@@ -6,24 +6,26 @@ Expand the contents of an image using generative fill.
 
 This app is powered by:
 
-🚀 [Replicate](https://replicate.com/?utm_source=project&utm_campaign=outpainter), a platform for running machine learning models in the cloud.
+🚀 [fal](https://fal.ai)
 
-🖍️ [Stable Diffusion Outpainting](https://replicate.com/stability-ai/stable-diffusion-inpainting?utm_source=project&utm_campaign=outpainter), an open-source machine learning model that generates images from text.
+🖍️ [Stable Diffusion Inpainting](https://fal.ai/models/stable-diffusion-xl-inpainting), an open-source machine learning model that generates images from text.
 
 ▲ [Vercel](https://vercel.com/), a platform for running web apps.
 
-⚡️ Nuxt.js [server-side API routes](server/api), for talking to Replicate's API.
+⚡️ Nuxt.js [server-side API routes](server/api), for talking to fal's API.
 
 👀 Nuxt.js Vue components, for the browser UI.
 
 🍃 [Tailwind CSS](https://tailwindcss.com/), for styles.
 
+This is a fork of an [outpainting demo](https://github.com/replicate/outpainter) for [Replicate](https://replicate.com).
+
 ## Development
 
 1. Install a recent version of [Node.js](https://nodejs.org/)
-1. Copy your [Replicate API token](https://replicate.com/account?utm_source=project&utm_campaign=outpainter) and set it in your environment:
+1. Copy your [fal API key](https://fal.ai/dashboard/keys) and set it in your environment:
    ```
-   echo "REPLICATE_API_TOKEN=<your-token-here>" > .env.local
+   echo "FAL_KEY=<your-key-here>" > .env
    ```
 1. Install dependencies and run the server:
    ```

@@ -1,20 +1,34 @@
-import Replicate from 'replicate'
+import * as fal from '@fal-ai/serverless-client'
 
-const replicate = new Replicate({
-  auth: useRuntimeConfig().replicateApiToken
-})
+fal.config({ credentials: useRuntimeConfig().falKey })
+
+const falDefaults = {
+  enable_safety_checker: false,
+  image_size: 'square_hd',
+  sync_mode: true,
+}
+
+type Input = {
+  image: string
+  mask: string
+  prompt: string
+  guidance_scale: number
+  num_inference_steps: number
+  num_outputs: number
+}
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  const { ws_key, input } = body
+  const { input } = body
 
-  // https://replicate.com/stability-ai/stable-diffusion-inpainting
-  const prediction = await replicate.predictions.create({
-    version: 'c28b92a7ecd66eee4aefcd8a94eb9e7f6c3805d5f06038165407fb5cb355ba67',
-    input,
-    webhook: `https://r3swiuknhh.execute-api.eu-west-1.amazonaws.com/prod/webhook?key=${ws_key}`,
-    webhook_events_filter: ['start', 'output', 'logs', 'completed']
-  })
+  const falInput = {
+    ...falDefaults,
+    image_url: input.image,
+    mask_url: input.mask,
+    prompt: input.prompt,
+    num_inference_steps: input.num_inference_steps,
+    num_images: input.num_outputs,
+  }
 
-  return prediction
+  return fal.subscribe('fal-ai/fast-sdxl/inpainting', { input: falInput })
 })

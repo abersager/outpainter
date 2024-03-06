@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     enabled: false
   },
   runtimeConfig: {
-    replicateApiToken: process.env.REPLICATE_API_TOKEN || ''
+    falKey: process.env.FAL_KEY || ''
   },
   nitro: {
     preset: 'vercel-edge'
