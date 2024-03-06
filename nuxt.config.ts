@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     falKey: process.env.FAL_KEY || ''
   },
   nitro: {
-    preset: 'vercel-edge'
+    preset: 'cloudflare_pages'
   },
   modules: ['@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
